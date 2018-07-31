@@ -22,7 +22,8 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    vendor: ['vue', 'element-ui', 'vue-router', 'vuex']
   },
   output: {
     path: config.build.assetsRoot,
@@ -36,7 +37,9 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-    }
+    },
+    // 使用绝对路径指明第三方模块存放的位置，以减少寻找
+    modules: [resolve('src'), resolve('node_modules')]
   },
   module: {
     rules: [
@@ -48,7 +51,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        // ?cacheDirectory表示传给babel-loader的参数, 用于缓存babel编译结果，加快重新编译速度
+        loader: 'babel-loader?cacheDirectory',
         include: [resolve('src'), resolve('test')]
       },
       {// 添加使用scss的配置
