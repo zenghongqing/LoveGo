@@ -55,10 +55,11 @@ module.exports = {
         loader: 'babel-loader?cacheDirectory',
         include: [resolve('src'), resolve('test')]
       },
-      {// 添加使用scss的配置
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
-      },
+      // 全局加载scss文件，不需要添加sass配置,但是需要安装node-sass和sass-loader模块
+      // {// 添加使用scss的配置
+      //   test: /\.scss$/,
+      //   loaders: ['style', 'css', 'sass']
+      // },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
