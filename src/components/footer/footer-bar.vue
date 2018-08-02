@@ -43,25 +43,28 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../assets/scss/mixins.scss';
 @mixin background ($path) {
     background: url($path) no-repeat center 25%;
-    background-size: 40px;
+    background-size: 20px;
 }
 .footer {
-    height: 100px;
+    height: 50px;
     display: flex;
     width: 100%;
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
+    // 解决1px问题
+    box-shadow: inset 0px 1px 1px -1px #c8c7cc;
     .item {
         flex: 1;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-around;
         text-align: center;
-        line-height: 160px;
+        line-height: 80px;
         color: #888;
-        font-size: 18px;
+        font-size: 12px;
         &:nth-of-type(1) {
             @include background('../../assets/image/svg/footer_home1.svg');
         }

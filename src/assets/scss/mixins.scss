@@ -1,0 +1,31 @@
+// 移动端1px问题
+@mixin onepx ($mode: 'top', $lastHide: false) {
+    position: relative;
+    &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        position: absolute;
+        border-top: 1px solid rgba(7, 17, 27, 0.1);
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -moz-transform: scale(0.5);
+    }
+    @if $mode == 'top' {
+        &:after {
+            top: 0;
+        }
+    }
+    @if $mode == 'bottom' {
+        &:after {
+            bottom: 0;
+        }
+    }
+    @if $lastHide {
+        &:last-child {
+            &:after {
+                border-top: 0;
+            }
+        }
+    }
+}

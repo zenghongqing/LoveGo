@@ -14,6 +14,8 @@ import 'lib-flexible/flexible'
 import '@/assets/scss/reset.scss'
 // 引入图片懒加载模块
 import VueLazyLoad from 'vue-lazyload'
+// 引入阿里字体图标
+import '@/assets/iconfont/iconfont.css'
 Vue.use(VueLazyLoad, {
     loading: '../static/loading-bars.svg'
 })
