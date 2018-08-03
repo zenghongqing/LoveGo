@@ -16,7 +16,9 @@ th, td {
   margin: 0;
   padding: 0;
 }
-
+input {
+  outline: none;
+}
 /*重置列表元素*/
 ul, ol {list-style: none;}
 

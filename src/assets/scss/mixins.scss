@@ -6,10 +6,11 @@
         display: block;
         width: 100%;
         position: absolute;
+        left: 0;
         border-top: 1px solid rgba(7, 17, 27, 0.1);
         transform: scale(0.5);
-        -webkit-transform: scale(0.5);
-        -moz-transform: scale(0.5);
+        -webkit-transform: scaleY(0.5);
+        -moz-transform: scaleY(0.5);
     }
     @if $mode == 'top' {
         &:after {

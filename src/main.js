@@ -16,6 +16,11 @@ import '@/assets/scss/reset.scss'
 import VueLazyLoad from 'vue-lazyload'
 // 引入阿里字体图标
 import '@/assets/iconfont/iconfont.css'
+// 引入swiper插件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+require('swiper/dist/css/swiper.css')
+Vue.use(VueAwesomeSwiper)
+// 注册图片懒加载模块
 Vue.use(VueLazyLoad, {
     loading: '../static/loading-bars.svg'
 })
