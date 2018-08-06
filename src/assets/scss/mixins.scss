@@ -1,3 +1,4 @@
+$red: #f23d0a;
 // 移动端1px问题
 @mixin onepx ($mode: 'top', $lastHide: false) {
     position: relative;

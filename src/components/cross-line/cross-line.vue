@@ -10,8 +10,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cross-line {
-    height: 10px;
+    height: 8px;
     width: 100%;
-    background: #ebebeb;
+    background: #eff4fa;
 }
 </style>
