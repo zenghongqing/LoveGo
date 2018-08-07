@@ -68,6 +68,7 @@ export default {
 .visit {
     position: relative;
     width: 100%;
+    overflow: hidden;
     .title-img {
         display: block;
         height: 40px;
