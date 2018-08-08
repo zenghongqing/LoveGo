@@ -8,6 +8,10 @@
         <index-visit></index-visit>
         <index-sec-kill></index-sec-kill>
         <cross-line></cross-line>
+        <index-book-shop></index-book-shop>
+        <cross-line></cross-line>
+        <index-market></index-market>
+        <cross-line></cross-line>
     </div>
 </template>
 <script>
@@ -18,6 +22,8 @@ import CrossLine from '@/components/cross-line/cross-line.vue'
 import IndexMessage from '@/view/index/message/index-message'
 import IndexVisit from '@/view/index/visit/index-visit'
 import IndexSecKill from '@/view/index/seco-kill/second-kill.vue'
+import IndexBookShop from '@/view/index/book-shop/index-book-shop.vue'
+import IndexMarket from '@/view/index/index-market/index-market.vue'
 export default {
     data () {
         return {}
@@ -29,7 +35,9 @@ export default {
         CrossLine,
         IndexMessage,
         IndexVisit,
-        IndexSecKill
+        IndexSecKill,
+        IndexBookShop,
+        IndexMarket
     }
 }
 </script>

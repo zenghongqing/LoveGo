@@ -68,7 +68,7 @@ export default {
         float: left;
         .wrapper-item {
             height: 100%;
-            width: 90%;
+            width: 100%;
             .label {
                 display: inline-block;
                 width: 40px;
