@@ -10,6 +10,9 @@ export default {
     name: 'App',
     components: {
         FooterNavCom
+    },
+    created () {
+        document.body.style.height = document.documentElement.clientHeight + 'px'
     }
 }
 </script>
