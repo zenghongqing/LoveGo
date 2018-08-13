@@ -1,5 +1,5 @@
 <template>
-    <b-scroll-load-data :pullup="true" class="scroll" @scrollEnd="scrollEnd" @scrollDistance="scrollDistance">
+    <b-scroll-load-data :pullup="true" class="scroll" :listenScroll="true" @scrollEnd="scrollEnd" @scrollDistance="scrollDistance">
         <div class="index" ref="indexWrapper">
             <index-header></index-header>
             <index-banner></index-banner>
@@ -14,6 +14,7 @@
             <index-market></index-market>
             <index-performance v-if="isShowPerformance"></index-performance>
         </div>
+        <go-to-top v-show="isShowGoTop"></go-to-top>
     </b-scroll-load-data>
 </template>
 <script>
@@ -28,6 +29,7 @@ import IndexSecKill from '@/view/index/seco-kill/second-kill.vue'
 import IndexBookShop from '@/view/index/book-shop/index-book-shop.vue'
 import IndexMarket from '@/view/index/index-market/index-market.vue'
 import IndexPerformance from '@/view/index/performance/index-performance'
+import GoToTop from '@/components/go-to-top/go-to-top'
 export default {
     data () {
         return {
@@ -46,7 +48,8 @@ export default {
         IndexSecKill,
         IndexBookShop,
         IndexMarket,
-        IndexPerformance
+        IndexPerformance,
+        GoToTop
     },
     mounted () {
     },
@@ -60,7 +63,12 @@ export default {
             }
         },
         scrollDistance (pos) {
-            console.log(pos)
+            // 获取屏幕高度
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+            console.log(Math.abs(pos.y), clientHeight)
+            if (Math.abs(pos.y) > clientHeight - 80) {
+                this.isShowGoTop = true
+            }
         }
     }
 }
