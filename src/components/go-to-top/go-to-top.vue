@@ -17,12 +17,14 @@ export default {
             let timer = null
             cancelAnimationFrame(timer)
             console.log(step)
+            let self = this
             timer = requestAnimationFrame(function step () {
                 if (distance > 0) {
                     distance -= step
-                    window.scrollTo(0, distance)
+                    // window.scrollTo(0, distance)
                     window.requestAnimationFrame(step)
                 } else {
+                    self.$emit('goToTop')
                     cancelAnimationFrame(timer)
                 }
             })

@@ -10,12 +10,12 @@
             <li>
                 <a href="javascript:void(0);" class="query">
                     <div class="recommend">
-                        <span class="btn">点击查看</span>
+                        <span class="btn" @click="queryRecommend">点击查看</span>
                     </div>
                 </a>
             </li>
             <li class="ios" v-for="(item) in performanceList" :key="item.id">
-                <router-link to="/" class="query">
+                <router-link to="/home" class="query">
                     <aside>
                         <img :src="item.imgSrc">
                     </aside>
@@ -74,6 +74,12 @@ export default {
                     point: 50
                 }
             ]
+        }
+    },
+    methods: {
+        // 点击查看推荐
+        queryRecommend () {
+            this.$router.push('/home/recommend')
         }
     }
 }

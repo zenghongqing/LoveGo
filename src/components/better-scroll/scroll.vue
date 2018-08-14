@@ -1,4 +1,4 @@
-<template>
+src/components/better-scroll/scroll.vue<template>
     <div class="scroll" ref=wrapper>
         <slot></slot>
     </div>
@@ -29,6 +29,11 @@ export default {
         pulldown: {
             type: Boolean,
             default: false
+        },
+        // 是否回到顶部的标志位
+        isGoToTop: {
+            type: Boolean,
+            default: false
         }
     },
     mounted () {
@@ -41,7 +46,7 @@ export default {
             if (!this.$refs.wrapper) {
                 return
             }
-            this.$refs.wrapper.style.height = document.body.clientHeight + 'px'
+            this.$refs.wrapper.style.height = document.documentElement.clientHeight + 'px'
             if (!this.scroll) {
                 this.scroll = new BScroll(this.$refs.wrapper, {
                     probeType: this.probeType,
@@ -91,6 +96,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-    overflow: hidden;
+    // overflow: hidden;
 }
 </style>
