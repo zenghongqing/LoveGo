@@ -12,6 +12,9 @@ const ShopCart = r => require.ensure([], () => r(require('@/view/shopcart/shopca
 const My = r => require.ensure([], () => r(require('@/view/my/my')), 'my')
 // 首页中的推荐
 const Recommend = r => require.ensure([], () => r(require('@/view/index/performance/recommend/recommend')), 'recommend')
+
+// 商品详情
+const Detail = r => require.ensure([], () => r(require('@/view/index/detail/detail')))
 Vue.use(Router)
 const routes = [
     {// 首页
@@ -48,6 +51,11 @@ const routes = [
         // 推荐
         path: '/recommend',
         component: Recommend
+    },
+    {
+        // 详情页
+        path: '/detail',
+        component: Detail
     }
 ]
 const router = new Router({
