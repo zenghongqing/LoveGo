@@ -3,7 +3,7 @@
         <transition name="move">
             <i class="iconfont icon-dijian minus" v-show="count" @click.stop="decrease"></i>
         </transition>
-        <input class="buy-num" id="buyNum" type="tel" :value="count">
+        <input class="buy-num" id="buyNum" type="tel" v-show="count" :value="count">
         <i class="iconfont icon-dizeng add" @click.stop="add"></i>
     </div>
 </template>
