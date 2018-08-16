@@ -27,16 +27,27 @@
             <p class="fee">运费6元，满49包邮</p>
         </section>
         <cross-line></cross-line>
+        <goods-detail></goods-detail>
+        <cross-line></cross-line>
         <section class="nums">
             <span class="title">数量</span>
             <cart-control @getNum="getCartCount"></cart-control>
         </section>
         <cross-line></cross-line>
+        <div class="rating">
+            <header>
+                <h3>商品评价</h3>
+                <span class="good-rating">好评 99%</span>
+            </header>
+            <rating-select :selectType="selectType" :onlyContent="onlyContent" @select="select" @switchContent="switchContent"></rating-select>
+        </div>
     </div>
 </template>
 <script>
 import CrossLine from '@/components/cross-line/cross-line'
 import CartControl from '@/components/cart-control/cart-control'
+import RatingSelect from './rating-select/rating-select'
+import GoodsDetail from './goods-detail/goods-detail'
 export default {
     data () {
         return {
@@ -60,16 +71,28 @@ export default {
                     shadowOffset: 100,
                     shadowScale: 0.6
                 }
-            }
+            },
+            selectType: 2,
+            onlyContent: true
         }
     },
     components: {
         CrossLine,
-        CartControl
+        CartControl,
+        RatingSelect,
+        GoodsDetail
     },
     methods: {
         getCartCount (count) {
             console.log(count)
+        },
+        // 选择评价的种类
+        select (type) {
+            this.selectType = type
+        },
+        // 切换内容
+        switchContent (onlyContent) {
+            this.onlyContent = !onlyContent
         }
     }
 }
@@ -165,6 +188,26 @@ export default {
             line-height: 50px;
             height: 100%;
             text-align: left;
+        }
+    }
+    .rating {
+        position: relative;
+        header {
+            min-height: 45px;
+            width: 100%;
+            @include onepx('bottom');
+            h3 {
+                float: left;
+                margin-left: 13px;
+            }
+            .good-rating {
+                float: left;
+                width: 20%;
+                margin-left: 10px;
+                font-size: 13px;
+                color: $red;
+                font-weight: bold;
+            }
         }
     }
 }
