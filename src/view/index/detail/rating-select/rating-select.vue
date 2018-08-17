@@ -2,13 +2,13 @@
     <div class="ratings-select">
         <div class="type">
             <span class="block all" :class="{'active': selectType === 2}" @click="select(2)">{{desc.all}}
-                <span class="count">1111</span>
+                <span class="count">{{ratingsMsg.all}}</span>
             </span>
             <span class="block positive" :class="{'active': selectType === 1}" @click="select(1)">{{desc.positive}}
-                <span class="count">1100</span>
+                <span class="count">{{ratingsMsg.positive}}</span>
             </span>
             <span class="block negtive" :class="{'active': selectType === 0}" @click="select(0)">{{desc.negative}}
-                <span class="count">11</span>
+                <span class="count">{{ratingsMsg.negtive}}</span>
             </span>
         </div>
         <div class="choice" @click="switchContent" :class="{'on': onlyContent === true}">
@@ -17,14 +17,14 @@
         </div>
         <div class="rating-list">
             <ul>
-                <li>
+                <li v-for="item in ratingsMsg.ratings" :key="item.id">
                     <div class="rating-user">
-                        <span class="user">j***9</span>
-                        <star-component class="star" :size="24" :score="4.8"></star-component>
-                        <span class="date">2018-06-03</span>
+                        <span class="user">{{item.username}}</span>
+                        <star-component class="star" :size="item.starSize" :score="item.score"></star-component>
+                        <span class="date">{{item.date}}</span>
                     </div>
                     <div class="content">
-                        裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。
+                        {{item.content}}
                     </div>
                 </li>
             </ul>
@@ -63,6 +63,10 @@ export default {
         onlyContent: {
             type: Boolean,
             default: false
+        },
+        ratingsMsg: {
+            type: Object,
+            default: null
         }
     },
     computed: {
@@ -127,9 +131,9 @@ export default {
     .choice {
       i {
         display: inline-block;
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
         color: #fff;
         background: #fff;
         border: 1px solid #ccc;

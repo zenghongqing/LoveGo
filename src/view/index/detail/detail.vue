@@ -1,53 +1,60 @@
 <template>
-    <div class="detail">
-        <header>
-            <i class="iconfont icon-fanhui back"></i>
-            <span>商品详情</span>
-            <i class="iconfont icon-gouwuche cart"></i>
-        </header>
-        <swiper :options="detailImgOptions">
-            <swiper-slide v-for="item in picList" :key="item.id">
-                <a href="javascript;void(0);" class="pic">
-                    <img :src="item" alt="">
-                </a>
-            </swiper-slide>
-        </swiper>
-        <section class="detail-desc">
-            <div class="text-wrap">
-                村上春树全新旅行随笔，在焦虑的时代像村上一样享受人生，发现一个温暖有趣的世界
-            </div>
-            <div class="item-desc">青春正能量 文艺每满100减50</div>
-            <div class="price"><i class="iconfont icon-renminbifuhao"></i>49.00</div>
-        </section>
-        <cross-line></cross-line>
-        <section class="desination">
-            <span>送至</span>
-            <p class="area">广东省深圳市南山区软件产业基地</p>
-            <span>运费</span>
-            <p class="fee">运费6元，满49包邮</p>
-        </section>
-        <cross-line></cross-line>
-        <goods-detail></goods-detail>
-        <cross-line></cross-line>
-        <section class="nums">
-            <span class="title">数量</span>
-            <cart-control @getNum="getCartCount"></cart-control>
-        </section>
-        <cross-line></cross-line>
-        <div class="rating">
+    <b-scroll-load-data ref="scrollRef" :pullup="true" :pulldown="true" class="scroll" :listenScroll="true" @scrollDistance="scrollDistance" @hideGoToTop="hideGoToTop">
+        <div class="detail">
             <header>
-                <h3>商品评价</h3>
-                <span class="good-rating">好评 99%</span>
+                <i class="iconfont icon-fanhui back" @click="goBack"></i>
+                <span>商品详情</span>
+                <i class="iconfont icon-gouwuche cart"></i>
             </header>
-            <rating-select :selectType="selectType" :onlyContent="onlyContent" @select="select" @switchContent="switchContent"></rating-select>
+            <swiper :options="detailImgOptions">
+                <swiper-slide v-for="item in picList" :key="item.id">
+                    <a href="javascript;void(0);" class="pic">
+                        <img :src="item" alt="">
+                    </a>
+                </swiper-slide>
+            </swiper>
+            <section class="detail-desc">
+                <div class="text-wrap">
+                    村上春树全新旅行随笔，在焦虑的时代像村上一样享受人生，发现一个温暖有趣的世界
+                </div>
+                <div class="item-desc">青春正能量 文艺每满100减50</div>
+                <div class="price"><i class="iconfont icon-renminbifuhao"></i>49.00</div>
+            </section>
+            <cross-line></cross-line>
+            <section class="desination">
+                <span>送至</span>
+                <p class="area">广东省深圳市南山区软件产业基地</p>
+                <span>运费</span>
+                <p class="fee">运费6元，满49包邮</p>
+            </section>
+            <cross-line></cross-line>
+            <goods-detail></goods-detail>
+            <cross-line></cross-line>
+            <section class="nums">
+                <span class="title">数量</span>
+                <cart-control :count="count" @getDecNum="getDecCount" @getAddNum="getAddCount"></cart-control>
+            </section>
+            <cross-line></cross-line>
+            <div class="rating">
+                <header>
+                    <h3>商品评价</h3>
+                    <span class="good-rating">好评 99%</span>
+                </header>
+                <rating-select :ratingsMsg="ratingsMsg" :selectType="selectType" :onlyContent="onlyContent" @select="select" @switchContent="switchContent"></rating-select>
+            </div>
         </div>
-    </div>
+        <buy-collect-component :num="count"></buy-collect-component>
+        <go-to-top v-show="isShowGoTop" @goToTop="goToTop"></go-to-top>
+    </b-scroll-load-data>
 </template>
 <script>
 import CrossLine from '@/components/cross-line/cross-line'
 import CartControl from '@/components/cart-control/cart-control'
 import RatingSelect from './rating-select/rating-select'
 import GoodsDetail from './goods-detail/goods-detail'
+import BScrollLoadData from '@/components/better-scroll/scroll'
+import GoToTop from '@/components/go-to-top/go-to-top'
+import BuyCollectComponent from '@/components/buy-collect/buy-collect'
 export default {
     data () {
         return {
@@ -72,19 +79,94 @@ export default {
                     shadowScale: 0.6
                 }
             },
-            selectType: 2,
-            onlyContent: true
+            selectType: 2, // 选择评价的种类
+            onlyContent: true,
+            isShowGoTop: false, // 是否显示滑动到顶部的图标
+            ratingsMsg: {
+                all: 1111,
+                positive: 1100,
+                negtive: 11,
+                ratings: [
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    },
+                    {
+                        username: 'j***9',
+                        starSize: 24,
+                        score: 4.8,
+                        date: '2018-06-03',
+                        content: '裤子已收到，质量很好，穿起来既好看又显瘦，很喜欢，一下买了两条。'
+                    }
+                ]
+            },
+            count: 0 // 选择购买的数量
         }
     },
     components: {
         CrossLine,
         CartControl,
         RatingSelect,
-        GoodsDetail
+        GoodsDetail,
+        BScrollLoadData,
+        GoToTop,
+        BuyCollectComponent
     },
     methods: {
-        getCartCount (count) {
-            console.log(count)
+        getDecCount (flag) {
+            if (flag) {
+                this.count--
+            }
+        },
+        getAddCount (flag) {
+            if (flag) {
+                this.count++
+            }
         },
         // 选择评价的种类
         select (type) {
@@ -93,6 +175,26 @@ export default {
         // 切换内容
         switchContent (onlyContent) {
             this.onlyContent = !onlyContent
+        },
+        // 返回首页
+        goBack () {
+            this.$router.go(-1)
+        },
+        scrollDistance (pos) {
+            // 获取屏幕高度
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+            console.log(Math.abs(pos.y), clientHeight - 60, Math.abs(pos.y) > clientHeight - 60, 'top')
+            if (Math.abs(pos.y) > clientHeight / 2) {
+                this.isShowGoTop = true
+            }
+        },
+        hideGoToTop () {
+            this.isShowGoTop = false
+        },
+        goToTop () {
+            console.log(111)
+            this.$refs.scrollRef.scrollTo(0, 0, 500)
+            this.isShowGoTop = false
         }
     }
 }

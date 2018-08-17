@@ -59,7 +59,13 @@ export default {
                     momentumLimitTime: 300, // 符合惯性拖动的最大时间
                     momentumLimitDistance: 15, // 符合惯性拖动的最小拖动距离
                     // 重新调整窗口大小时,重新计算better-scroll时间间隔
-                    resizePolling: 60
+                    resizePolling: 60,
+                    pullUpLoad: {
+                        threshold: 30 // 负值是当上拉到超过低部 30px；正值是距离底部距离时，
+                    },
+                    pullDownLoad: {
+                        threshold: 100
+                    }
                 })
             } else {
                 this.scroll.refresh()
@@ -75,9 +81,15 @@ export default {
             // 是否派发滚动到底部事件，用于上拉加载
             if (this.pullup) {
                 this.scroll.on('scrollEnd', () => {
-                    if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+                    if (this.scroll.y <= (this.scroll.maxScrollY - 50)) {
                         this.$emit('scrollEnd', false)
                     }
+                })
+            }
+            // 是否派发滚动到底部事件，用于下拉加载
+            if (this.pulldown) {
+                this.scroll.on('pullingDown', () => {
+                    this.$emit('hideGoToTop')
                 })
             }
         },

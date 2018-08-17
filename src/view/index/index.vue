@@ -1,5 +1,5 @@
 <template>
-    <b-scroll-load-data ref="scrollRef" :pullup="true" class="scroll" :listenScroll="true" @scrollEnd="scrollEnd" @scrollDistance="scrollDistance">
+    <b-scroll-load-data ref="scrollRef" :pullup="true" :pulldown="true" class="scroll" :listenScroll="true" @scrollEnd="scrollEnd" @scrollDistance="scrollDistance" @hideGoToTop="hideGoToTop">
         <div class="index">
             <index-header></index-header>
             <index-banner></index-banner>
@@ -71,9 +71,10 @@ export default {
             if (Math.abs(pos.y) > clientHeight - 60) {
                 this.isShowGoTop = true
             }
-            if (Math.abs(pos.y) < clientHeight / 2) {
-                this.isShowGoTop = false
-            }
+        },
+        // 隐藏回到顶部图标
+        hideGoToTop () {
+            this.isShowGoTop = false
         },
         /**
          * 点击回到顶部, 并隐藏回到顶部图案

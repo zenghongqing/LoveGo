@@ -16,7 +16,7 @@ export default {
             let step = distance / 50 // 每步的距离
             let timer = null
             cancelAnimationFrame(timer)
-            console.log(step)
+            console.log(distance, step)
             let self = this
             timer = requestAnimationFrame(function step () {
                 if (distance > 0) {
