@@ -10,23 +10,28 @@
 <script>
 export default {
     data () {
-        return {}
+        return {
+        }
     },
     props: {
         count: {
             type: Number,
             default: 1
+        },
+        idx: {
+            type: Number,
+            default: 0
         }
     },
     methods: {
         add () {
-            this.count++
-            this.emit('getNum', this.count)
+            this.$emit('getAddNum', true, this.idx)
         },
         decrease () {
-            if (this.count > 0) {
-                this.count--
-                this.emit('getNum', this.count)
+            if (this.count > 1) {
+                this.$emit('getDecNum', true, this.idx)
+            } else {
+                this.$emit('getDecNum', false, this.idx)
             }
         }
     }
@@ -36,19 +41,19 @@ export default {
 .cart-control {
     position: relative;
     float: left;
-    width: 120px;
+    width: 80px;
     .minus, .add {
         position: relative;
         float: left;
         // display: inline-block;
-        width: 30px;
+        width: 24px;
         height: 50px;
         line-height: 50px;
         // background-color: #fff;
         text-align: center;
     }
     .buy-num {
-        width: 30px;
+        width: 24px;
         height: 50px;
         float: left;
         line-height: 50px;
