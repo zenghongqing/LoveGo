@@ -1,18 +1,24 @@
 const Koa = require('koa')
 const app = new Koa()
 const routes = require('./routes')
-const body = require('koa-bodyparser')
 const serve = require('koa-static')
 const path = require('path')
+// const session = require('koa-session-store')
+// const mongooseStore = require('koa-session-mongoose')
 const { port } = require('./config')
-app.use(body())
+require('./db')
+// 路由配置
+routes(app)
 // 设置静态目录
 app.use(serve(
     path.join(__dirname, '/public')
 ))
-// 路由配置
-routes(app)
+// app.use(session({
+//     store: mongooseStore.create({
+//         expires: 1000 * 5
+//     })
+// }))
 
 app.listen(port, () => {
-    console.log('程序正在启动...')
+    console.log('程序正在启动...' + port)
 })

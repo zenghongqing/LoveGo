@@ -1,9 +1,11 @@
-const router = require('koa-router')()
+const Router = require('koa-router')
 const controller = require('../controller')
+const router = new Router()
+const bodyParser = require('koa-bodyparser')
 // 启动数据库
-require('../db')
 module.exports = (app) => {
-    router.get('/reg', controller.Reg)
-    router.get('/login', controller.Login)
+    router.post('/reg', controller.Reg)
+    router.post('/login', controller.Login)
+    app.use(bodyParser())
     app.use(router.routes()).use(router.allowedMethods())
 }
